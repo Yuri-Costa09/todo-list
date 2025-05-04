@@ -20,7 +20,7 @@ model User {
   name          String
   email         String @unique
   password_hash String
-  Task          Task[]
+  Task          Task[] // a colchete diz que o User pode ter várias tasks
 
   @@map("users")
 }
