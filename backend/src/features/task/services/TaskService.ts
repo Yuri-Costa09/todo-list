@@ -22,7 +22,7 @@ export class TaskService {
         if (!task) {
             throw new Error('Task not found or you do not have permission to delete this task');
         }
-        await this.taskRepository.deleteTask(id, (this.taskRepository as any).prisma);
+        await this.taskRepository.deleteTask(id);
     }
 
     async getTasksByUserId(userId: string): Promise<Task[]> {

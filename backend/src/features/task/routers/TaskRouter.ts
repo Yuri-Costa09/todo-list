@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '../../../../generated/prisma';
 import { TaskRepository } from "../repositories/TaskRepository";
 import { TaskService } from "../services/TaskService";
 import { TaskController } from "../controllers/TaskController";

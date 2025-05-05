@@ -133,7 +133,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/yuricosta/Documents/Programacao/e-commerce-ts-react/todo-list/backend/generated/prisma",
+      "value": "/workspaces/todo-list/backend/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -142,12 +142,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "linux-arm64-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/yuricosta/Documents/Programacao/e-commerce-ts-react/todo-list/backend/prisma/schema.prisma",
+    "sourceFilePath": "/workspaces/todo-list/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -161,11 +161,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgres://postgres:postgres@localhost:5434/todo-ts"
+        "value": null
       }
     }
   },

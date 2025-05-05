@@ -1,6 +1,6 @@
 import { ITaskRepository } from "../interfaces/ITaskRepository";
 import {  Task } from "generated/prisma";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "generated/prisma";
 
 export class TaskRepository implements ITaskRepository {
     private prisma: PrismaClient
@@ -19,10 +19,10 @@ export class TaskRepository implements ITaskRepository {
             data
         })
     }
-    deleteTask(id: string, prisma: PrismaClient): Promise<void> {
+    deleteTask(id: string): Promise<void> {
         return this.prisma.task.delete({
             where: { id }
-        })
+        }).then(() => {});
     }
     getTasksByUserId(userId: string): Promise<Task[]> {
         return this.prisma.task.findMany({

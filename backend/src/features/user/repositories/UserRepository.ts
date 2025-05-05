@@ -1,5 +1,3 @@
-import { Jwt } from 'jsonwebtoken'
-import bcrypt  from 'bcrypt'
 import { PrismaClient, Task, User } from '../../../../generated/prisma';
 import { IUserRepository } from '../interfaces/IUserRepository';
 
