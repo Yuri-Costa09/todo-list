@@ -9,17 +9,6 @@ export class UserController {
         this.userService = userService;
     }
 
-    async getUserTasks(req: Request, res: Response) {
-        try {
-            const userId = req.params.userId;
-            const tasks = await this.userService.getUserTasksByUserId(userId);
-            res.status(200).json(tasks);
-        }
-        catch (error) {
-            res.status(404).json(error);
-        }
-    }
-
     async register(req: Request, res: Response) {
         try {
             const data = req.body;
