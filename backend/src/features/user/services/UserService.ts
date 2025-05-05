@@ -1,22 +1,23 @@
 import { IUserRepository } from "../interfaces/IUserRepository";
-import { User, Task } from "../../../../generated/prisma";
+import { User } from "../../../../generated/prisma";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export class UserService {
-
     private userRepository: IUserRepository;
+    private jwtSecret: string;
+
     constructor(userRepository: IUserRepository) {
         this.userRepository = userRepository;
+        this.jwtSecret = process.env.JWT_SECRET || 'secretKey';
     }
 
     async registerUser(data: Omit<User, 'id'>): Promise<User> {
-
         if (!this.isValidEmail(data.email)) {
             throw new Error('Invalid email');
         }
 
-        const hashedPassword = await bcrypt.hash(data.password_hash, 10);
+        const hashedPassword = await this.hashPassword(data.password_hash);
 
         const userData = {
             ...data,
@@ -28,23 +29,39 @@ export class UserService {
 
     async login(email: string, password: string): Promise<{ token: string, user: User }> {
         const user = await this.userRepository.findByEmail(email);
-    
         if (!user) throw new Error('User not found');
-    
-        const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+
+        const isPasswordValid = await this.verifyPassword(password, user.password_hash);
         if (!isPasswordValid) throw new Error('Invalid password');
-    
-        const token = jwt.sign(
-          { id: user.id, email: user.email },
-          process.env.JWT_SECRET || 'secretKey', 
-          {
-            expiresIn: '1h', 
-          }
-        );
-    
+
+        const token = this.generateToken({ id: user.id, email: user.email });
+
         return { token, user };
-      }
-    
+    }
+
+    // JWT Token methods
+    async validateToken(token: string): Promise<{ id: string, email: string } | null> {
+        try {
+            const decoded = jwt.verify(token, this.jwtSecret) as { id: string, email: string };
+            return decoded;
+        } catch (err) {
+            return null;
+        }
+    }
+    private generateToken(payload: { id: string, email: string }): string {
+        return jwt.sign(payload, this.jwtSecret, { expiresIn: '1h' });
+    }
+
+    // Password hashing
+    private async hashPassword(password: string): Promise<string> {
+        return await bcrypt.hash(password, 10);
+    }
+
+    private async verifyPassword(password: string, hash: string): Promise<boolean> {
+        return await bcrypt.compare(password, hash);
+    }
+
+    // UserRepository methods
     async findByEmail(email: string): Promise<User | null> {
         return await this.userRepository.findByEmail(email);
     }
@@ -53,12 +70,8 @@ export class UserService {
         return await this.userRepository.findById(id);
     }
 
-    async getUserTasksByUserId(id: string): Promise<Task[] | null> {
-        return await this.userRepository.getUserTasksByUserId(id);
-    }
-
     private isValidEmail(email: string): boolean {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
-      }
+    }
 }

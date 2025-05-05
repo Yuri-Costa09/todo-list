@@ -13,5 +13,7 @@ export const UserRouter = Router();
 
 UserRouter.post('/register', (req, res) => userController.register(req, res));
 UserRouter.post('/login', (req, res) => userController.login(req, res));
+
+/** Only for Authenticated users {admin} **/
 UserRouter.get('/:id', (req, res) => userController.getUserById(req, res));
 
