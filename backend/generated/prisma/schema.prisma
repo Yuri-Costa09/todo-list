@@ -17,10 +17,10 @@ datasource db {
 model User {
   id String @id @default(uuid())
 
-  name     String
-  email    String @unique
-  password String
-  Task     Task[]
+  name          String
+  email         String @unique
+  password_hash String
+  Task          Task[] // a colchete diz que o User pode ter várias tasks
 
   @@map("users")
 }
@@ -29,8 +29,9 @@ model Task {
   id String @id @default(uuid())
 
   description String
-  complete    Boolean @default(false)
-  author      User    @relation(fields: [authorId], references: [id])
+  complete    Boolean  @default(false)
+  created_at  DateTime @default(now())
+  author      User     @relation(fields: [authorId], references: [id])
   authorId    String
 
   @@map("tasks")

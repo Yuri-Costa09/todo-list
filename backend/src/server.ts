@@ -1,5 +1,9 @@
-const app = require('./app') 
-const cors = require('cors')
+import cors from 'cors';
+import app from './app';
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 
 app.use(cors())
 app.listen(3001, () => {

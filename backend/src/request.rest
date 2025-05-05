@@ -1,0 +1,12 @@
+POST http://localhost:3001/api/users/register
+
+POST http://localhost:3001/api/users/login
+
+    {
+        "name": "yuri",
+        "email": "cavalo@gmail.com",
+        "password_hash": "1234"
+    }   
+
+
+GET http://localhost:3001/
