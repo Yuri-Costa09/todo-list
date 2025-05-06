@@ -1,11 +1,13 @@
 {
 	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
-	"dockerComposeFile": "../docker-compose.yml",
+	"dockerComposeFile": [
+	  "../docker-compose.yml"
+	],
 	"service": "backend",
-	"workspaceFolder": "/workspaces/todo-list/backend",
+	"workspaceFolder": "/workspace",
 	"features": {
 	  "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
-	}
+	},
+	"forwardPorts": [5432],
+	"postCreateCommand": "npm install" // Install dependencies once setup
   }
-  
