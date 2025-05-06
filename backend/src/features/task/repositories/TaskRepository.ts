@@ -1,6 +1,6 @@
 import { ITaskRepository } from "../interfaces/ITaskRepository";
 import {  Task } from "generated/prisma";
-import { PrismaClient } from "generated/prisma";
+import { PrismaClient } from '../../../../generated/prisma';
 
 export class TaskRepository implements ITaskRepository {
     private prisma: PrismaClient

@@ -9,7 +9,7 @@ export class UserService {
 
     constructor(userRepository: IUserRepository) {
         this.userRepository = userRepository;
-        this.jwtSecret = process.env.JWT_SECRET || 'secretKey';
+        this.jwtSecret = process.env.JWT_SECRET || 'default';
     }
 
     async registerUser(data: Omit<User, 'id'>): Promise<User> {
@@ -20,9 +20,12 @@ export class UserService {
         const hashedPassword = await this.hashPassword(data.password_hash);
 
         const userData = {
-            ...data,
+            name: data.name,
+            email: data.email,
             password_hash: hashedPassword,
         };
+
+        console.log('User data:', userData);
 
         return await this.userRepository.registerUser(userData);
     }
