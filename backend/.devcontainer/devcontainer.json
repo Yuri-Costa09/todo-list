@@ -1,5 +1,6 @@
 {
 	"name": "Node.js & TypeScript",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
 	"dockerComposeFile": "../docker-compose.yml",
 	"service": "backend",
 	"workspaceFolder": "/workspaces/todo-list/backend",
@@ -7,3 +8,4 @@
 	  "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	}
   }
+  
