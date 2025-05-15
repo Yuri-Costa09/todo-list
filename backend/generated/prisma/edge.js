@@ -133,7 +133,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/workspace/generated/prisma",
+      "value": "/Users/yuricosta/Documents/Programacao/projetos/hhgdfg/Sem Título/backend/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -142,12 +142,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "linux-arm64-openssl-3.0.x",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/workspace/prisma/schema.prisma",
+    "sourceFilePath": "/Users/yuricosta/Documents/Programacao/projetos/hhgdfg/Sem Título/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -161,11 +161,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:postgres@postgres:5432/todo-list"
+        "value": null
       }
     }
   },
