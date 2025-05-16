@@ -6,6 +6,6 @@ app.get('/', (req, res) => {
 })
 
 app.use(cors())
-app.listen(3001, () => {
-    console.log('Server running on port 3001');
+app.listen(3001, '0.0.0.0', () => {
+    console.log('Server running on port 0.0.0.0:3001');
 })
