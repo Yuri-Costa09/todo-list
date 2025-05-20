@@ -2,6 +2,11 @@ import { TaskRouter } from './features/task/routers/TaskRouter';
 import { UserRouter } from './features/user/routers/UserRouter'
 import express from 'express'
 import cors from 'cors';
+import dotenv from 'dotenv';
+import https from 'https';
+import fs from 'fs';
+
+dotenv.config();
 
 const app = express();
 app.use(cors({

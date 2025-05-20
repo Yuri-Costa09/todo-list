@@ -17,9 +17,14 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3001:3001"
+      - "3000:3000"  # HTTP
+      - "3001:3001"  # HTTPS
+    volumes:
+      - ./certs:/app/certs  # Montagem dos certificados
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      - SSL_KEY_PATH=certs/private-key.pem
+      - SSL_CERT_PATH=certs/certificate.pem
     depends_on:
       - postgres
     restart: unless-stopped
