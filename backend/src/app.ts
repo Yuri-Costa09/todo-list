@@ -10,7 +10,14 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: 'https://todofrontendlist.netlify.app/',
+    origin: [
+        'https://todofrontendlist.netlify.app',
+        'https://todofrontendlist.netlify.app/',
+        'https://aitrip.one',
+        'https://aitrip.one/',
+        'http://localhost:3000',
+        'http://localhost:3001'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,

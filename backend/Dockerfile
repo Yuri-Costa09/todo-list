@@ -10,10 +10,11 @@ COPY . .
 
 RUN npx prisma generate
 
-# Criar diretório para certificados
 RUN mkdir -p certs
 
 EXPOSE 3000
 EXPOSE 3001
+
+RUN npx prisma migrate deploy
 
 CMD ["npm", "start"]
